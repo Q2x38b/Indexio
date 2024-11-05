@@ -1,4 +1,4 @@
-const newsAPIKey = 'YOUR_NEWSAPI_KEY';
+const newsAPIKey = 'ff6a37b927b04ea081c2479fe324989e';
 const stackExchangeAPIUrl = 'https://api.stackexchange.com/2.3/search?order=desc&sort=activity&site=stackoverflow';
 const resultsCounter = document.getElementById('resultsCount');
 const searchEngines = {
