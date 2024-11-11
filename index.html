@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Indexio</title>
+		<script src="//www.thefreedictionary.com/dict.js"></script>
+		<script src="script.js"></script>
+		<script src="database.js"></script>
+		<link href="styles.css" rel="stylesheet"/>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&family=Outfit:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+		<!--<script src="https://dashboard.primecx.ai/assets/js/custom-chatapp.js" data-id="MTczMTEyNzM3NS1DQjg4LVVJMTcy" data-domain="https://aicxagent.com" ></script>-->
+		<!--z_1dWlkIjoiYzg1MDQzOTctYzNhOC00MGRiLTk5NmItZWY5NmZkZTZkODA1In0.xRRbYB3jQjJSQm98wyQHUE-z6qHvoQp0BHGTxqdXu3DhN2EqRt6lK09Vaxl6iHg_FS9nThGIWxvRzw7G-zWYVQ-->
+		<!--YukCcOEQ.05OVySmzqQKLr4LNtrnnTzY4OpRSCATy-->
+		<!--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-->
+		<!--Hugging face api key - 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-->
+	</head>
+	<body ondblclick="dictionary()" class="fadeInUp-animation" style="display: flex; justify-content: center; align-items: center;" id="enterSearch">
+		<!--<div id="drggable" class="draggable">
+			<div id="" style="font-size: 1.3rem;">AI Assistant</div><div id="drggableheader">.</div>
+			<button onclick="getAIResponse()">AI Search</button>
+			<input type="search" id="query" autocomplete="off" placeholder="Enter Something..." onkeyup="showSuggestions(this.value)">
+		</div>-->
+		<h1 class="space-mono-regular">Indexio</h1>
+		<h4 class="space-mono-regular">All In One Centralized Search Tool</h4>
+		<div class="container-main">
+			<div class="search-box">
+				<input type="search" id="query" autocomplete="off" placeholder="Search Something New..." onkeyup="showSuggestions(this.value)">
+			</div>		
+		<div class="categories">
+			<div class="category">
+				<h3 class="hedvig-letters-sans-regular">Search Filters</h3>
+				<div class="category-main-search">
+					<button onclick="executeSearch()" class="search-button" id="imgbtn"><span class="material-symbols-outlined">search</span></button>
+					<button onclick="clearInput()" class="search-button-x" style="font-size: 1.1rem;"><b>X</b></button>
+				</div>
+				<div class="btn-search">
+					<input type="search" id="searchbar" autocomplete="off" onkeyup="search_btns()" placeholder="Filter Searches">
+				</div>
+				<div class="widget-container">
+					<button onclick="getAIResponse()" id="aisearchbtn">AI Search</button>
+					<button onclick="getAIImage()">Image Generator</button>
+					<button onclick="downloadImage()" style="display: flex;justify-content: center;align-items: center;"><img src="download_icon.png" width="17" height="17"></img><!-- <svg viewBox="0 0 256 256" height="32" width="38" xmlns="http://www.w3.org/2000/svg"><path d="M74.34 85.66a8 8 0 0 1 11.32-11.32L120 108.69V24a8 8 0 0 1 16 0v84.69l34.34-34.35a8 8 0 0 1 11.32 11.32l-48 48a8 8 0 0 1-11.32 0ZM240 136v64a16 16 0 0 1-16 16H32a16 16 0 0 1-16-16v-64a16 16 0 0 1 16-16h52.4a4 4 0 0 1 2.83 1.17L111 145a24 24 0 0 0 34 0l23.8-23.8a4 4 0 0 1 2.8-1.2H224a16 16 0 0 1 16 16m-40 32a12 12 0 1 0-12 12a12 12 0 0 0 12-12"fill="currentColor"></path></svg>--></button>
+					<!--<div class="file-input-container">
+						<input type="file" id="imageInput" accept="image/*" onchange="handleImageUpload(event)">
+						<button onclick="resetFileInput()" class="reset-file-btn">Reset</button>
+					</div>-->
+				</div>
+
+				<hr>
+				<div class="hedvig-letters-sans-regular search-engines">
+					<button data-engine="google" class="engine-btn" data-meta="search general information web">Google</button>
+					<button data-engine="bing" class="engine-btn" data-meta="search general information web">Bing</button>
+					<button data-engine="yahoo" class="engine-btn" data-meta="search general information web">Yahoo</button>
+					<button data-engine="duckduckgo" class="engine-btn" data-meta="search general privacy-focused web">DuckDuckGo</button>
+					<button data-engine="ecosia" class="engine-btn" data-meta="search eco-friendly environment">Ecosia</button>
+					<button data-engine="perplexity" class="engine-btn" data-meta="ai answers chatbot information">Perplexity</button>
+					<button data-engine="scispace" class="engine-btn" data-meta="science research academic publications">Sci Space</button>
+					<button data-engine="scholar" class="engine-btn" data-meta="academic research publications citations">Google Scholar</button>
+					<button data-engine="jstor" class="engine-btn" data-meta="academic journals archives research humanities">JStor</button>
+					<button data-engine="sciencedirect" class="engine-btn" data-meta="scientific research journals articles">Science Direct</button>
+					<button data-engine="core" class="engine-btn" data-meta="open access research papers academic">CORE</button>
+					<button data-engine="base" class="engine-btn" data-meta="academic research open access repository">BASE</button>
+					<button data-engine="wikipedia" class="engine-btn" data-meta="general knowledge encyclopedia community">Wikipedia</button>
+					<button data-engine="openlibrary" class="engine-btn" data-meta="books reading ebooks public domain">Open Library</button>
+					<button data-engine="dictionary" class="engine-btn" data-meta="definitions language thesaurus reference">Dictionary</button>
+					<button data-engine="nasa" class="engine-btn" data-meta="space science technology agency">NASA</button>
+					<button data-engine="pewresearch" class="engine-btn" data-meta="social science research studies reports">Pew Research</button>
+					<button data-engine="wolframalpha" class="engine-btn" data-meta="calculations knowledge base data science">Wolfram Alpha</button>
+					<button data-engine="statista" class="engine-btn" data-meta="statistics data business research market">Statista</button>
+					<button data-engine="britannica" class="engine-btn" data-meta="encyclopedia reference facts knowledge">Britannica</button>
+					<button data-engine="github" class="engine-btn" data-meta="coding development projects repositories developer community questions code">GitHub</button>
+					<button data-engine="npm" class="engine-btn" data-meta="node js packages development coding code developer">NPM</button>
+					<button data-engine="mdn" class="engine-btn" data-meta="web development coding documentation resources code">MDN</button>
+					<button data-engine="stackoverflow" class="engine-btn" data-meta="developer community questions coding code development">Stack Overflow</button>
+					<button data-engine="quickmath" class="engine-btn" data-meta="math calculations equations solve">Quick Math</button>
+					<button data-engine="mapquest" class="engine-btn" data-meta="maps directions navigation location">Map Quest</button>
+					<button data-engine="googlemaps" class="engine-btn" data-meta="maps directions navigation location">Google Maps</button>
+					<button data-engine="flaticon" class="engine-btn" data-meta="design icons graphics UI">Flat Icon</button>
+					<button data-engine="nounproject" class="engine-btn" data-meta="design icons graphics UI">Noun Project</button>
+					<button data-engine="emojis" class="engine-btn" data-meta="design emojis symbols characters">Emojis</button>
+					<button data-engine="youtube" class="engine-btn" data-meta="video media entertainment tutorials">YouTube</button>
+					<button data-engine="reddit" class="engine-btn" data-meta="social media community discussion threads">Reddit</button>
+					<button data-engine="pinterest" class="engine-btn" data-meta="social media images ideas inspiration">Pinterest</button>
+					<button data-engine="translate" class="engine-btn" data-meta="language translation multilingual">Translate</button>
+					<button data-engine="encyclopedia" class="engine-btn" data-meta="general knowledge reference information">Encyclopedia</button>
+					<button data-engine="news" class="engine-btn" data-meta="current events articles journalism">News</button>
+					<button data-engine="weforum" class="engine-btn" data-meta="economic global issues world economy">WE Forum</button>
+					<button data-engine="econbiz" class="engine-btn" data-meta="business economics research publications">Econ Biz</button>
+					<button data-engine="arxiv" class="engine-btn" data-meta="preprints research science technology">arXiv</button>
+					<button data-engine="pubchem" class="engine-btn" data-meta="chemistry molecules compounds science">Pub Chem</button>
+					<button data-engine="pubmed" class="engine-btn" data-meta="medical research articles health science">Pub Med</button>
+					<button data-engine="waybackmachine" class="engine-btn" data-meta="internet archive history websites">Way Back Machine</button>
+					<button data-engine="tedtalks" class="engine-btn" data-meta="video talks inspiration ideas innovation">Ted Talks</button>
+					<button data-engine="mit" class="engine-btn" data-meta="academic journals archives research humanities engineering">MIT Open Course</button>
+					<button data-engine="searchcode" class="engine-btn" data-meta="coding development projects developer code">Search Code</button>
+					<button data-engine="tradingview" class="engine-btn" data-meta="stocks economic economy business">Trading View</button>
+					<button data-engine="amazon" class="engine-btn" data-meta="retail money shopping shop">Amazon</button>
+					<button data-engine="camelcamelcamel" class="engine-btn" data-meta="retail money shopping shop">Amazon Price Tracker</button>
+					<button class="engine-btn" data-meta="photo search" onclick=" window.open('http://google.com','_blank')">Google Images</button>
+				</div>
+				<div id="suggestions" class="space-mono-regular suggestions-dropdown"></div>
+			</div>
+			
+			<div class="results-container" id="results">
+				<div class="dropdown" id="dropdownResults">
+					<div class="dropdown-content" id="dropdownContent">
+						<div class="dictionary-result" id="definition"></div>
+					</div>
+				</div>				
+			</div>
+		</div>
+		<div class="cursor"></div>
+	</body>
+	<script>
+		document.getElementById("aisearchbtn").onmousemove = (e) => {
+  const rect = e.target.getBoundingClientRect(),
+        x = e.clientX - rect.left,
+        y = e.clientY - rect.top;
+
+  e.target.style.setProperty("--mouse-x", `${x}px`);
+  e.target.style.setProperty("--mouse-y", `${y}px`);
+};
+
+	dragElement(document.getElementById("drggable"));
+	function dragElement(elmnt) {
+		var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+		if (document.getElementById(elmnt.id + "header")) {
+			document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+		} else {
+			elmnt.onmousedown = dragMouseDown;
+		}
+
+		function dragMouseDown(e) {
+			e = e || window.event;
+			e.preventDefault();
+			pos3 = e.clientX;
+			pos4 = e.clientY;
+			document.onmouseup = closeDragElement;
+			document.onmousemove = elementDrag;
+		}
+
+		function elementDrag(e) {
+			e = e || window.event;
+			e.preventDefault();
+			pos1 = pos3 - e.clientX;
+			pos2 = pos4 - e.clientY;
+			pos3 = e.clientX;
+			pos4 = e.clientY;
+			elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+			elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+		}
+
+		function closeDragElement() {
+			document.onmouseup = null;
+			document.onmousemove = null;
+		}
+	}
+	</script>
+	<script>
+		let styleSheet = null;
+
+		const SPARK_ELEMENT_WIDTH = 30;
+		const DISTANCE = 15;
+
+		const RANDOMNESS_ON = true;
+
+		function createTransformSteps() {
+		if (Array.from(arguments).length === 0) {
+			throw Exception("arguments to createTransformSteps should never be empty!");
+		}
+
+		const inputSteps = Array.from(arguments);
+		const outputSteps = [inputSteps.shift()];
+		inputSteps.forEach((step, i) => {
+			outputSteps.push(`${outputSteps[i]} ${step}`);
+		});
+
+		return outputSteps;
+		}
+
+		const dynamicAnimation = (name, rotation) => {
+		if (!styleSheet) {
+			styleSheet = document.createElement("style");
+			styleSheet.type = "text/css";
+			document.head.appendChild(styleSheet);
+		}
+
+
+		const randomDist = RANDOMNESS_ON
+			? Math.floor((Math.random() - 0.5) * DISTANCE * 0.7)
+			: 0;
+
+		const [s1, s2, s3] = createTransformSteps(
+			`translate(-50%, -50%) rotate(${rotation}deg) translate(10px, 0px)`,
+			`translate(${DISTANCE + randomDist}px, 0px) scale(0.5, 0.5)`,
+			`translate(${SPARK_ELEMENT_WIDTH / 2}px, 0) scale(0, 0)`
+		);
+
+		// todo some axis would be good here.
+		styleSheet.sheet.insertRule(
+			`@keyframes ${name} {
+			0% {
+			transform: ${s1};
+			}
+			70% {
+			transform: ${s2};
+			}
+			100% {
+			transform: ${s3};
+			}
+		}`,
+			styleSheet.length
+		);
+		};
+
+		document.getElementById("imgbtn").addEventListener("click", (e) => {
+		const center = { x: e.pageX, y: e.pageY };
+		makeBurst(center);
+		});
+
+		const makeBurst = (center) => {
+		for (let i = 0; i < 8; i++) {
+			const randomSpace = RANDOMNESS_ON
+			? Math.floor(-17 + Math.random() * 34)
+			: 0;
+			makeSpark(center, 45 * i + randomSpace);
+		}
+		};
+
+
+		const makeSpark = (center, rotation) => {
+		const div = document.createElement("div");
+		const aniName = `disappear_${rotation}`;
+		dynamicAnimation(aniName, rotation);
+
+		div.classList.add("spark");
+		div.style.left = `${center.x}px`;
+		div.style.top = `${center.y}px`;
+		div.style.animation = `${aniName} 300ms ease-out both`;
+		document.body.append(div);
+		setTimeout(() => {
+			document.body.removeChild(div);
+		}, 1000);
+		};
+	</script>
+</html>
