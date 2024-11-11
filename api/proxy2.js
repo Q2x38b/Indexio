@@ -2,7 +2,7 @@ export default async function handler(req, res) {
     const apiUrl = 'https://api-inference.huggingface.co/models/XLabs-AI/flux-RealismLora'; // Replace with your actual API URL
   
     // Set CORS headers to allow requests from your GitHub Pages site
-    res.setHeader('Access-Control-Allow-Origin', 'https://q2x38b.github.io/Indexio/'); // Replace with your GitHub Pages URL
+    res.setHeader('Access-Control-Allow-Origin', 'https://q2x38b.github.io'); // Replace with your GitHub Pages URL
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   
